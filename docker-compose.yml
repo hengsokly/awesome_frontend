@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+  bundle:
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+      - bundle:/app/node_modules
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '10'
